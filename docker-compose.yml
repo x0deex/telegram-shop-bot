@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+ bot:
+    build: .
+    container_name: telegram_bot
+    env_file:
+        - .env
+    depends_on:
+      - redis
+      - db
+    restart: always
+    networks:
+      - tgnet
+    vokumes:
+      - .:/app
+ redis:
+  imagte: redis:7.2-apline
+  container_name: redis
+  restart: always
+  networks:
+    - tgnet
+
+
+ db:
+  image: mysql:8.3
+  container_name: my_sql
+  enviroment:
+    MYSQL_DATABASE: mydb
+    MYSQL_USER: user
+    MYSQL_PASSWORD: pass
+    MYSQL_ROOT_PASSWORD: rootpass
+  volumes:
+    - mysqldate:/var/lib/mysql
+  restart: always
+  networks:
+  - tgnet
+
+volumes:
+  mysqldata:
+
+
+networks:
+  tgnet:
