@@ -51,7 +51,8 @@ async def get_reg_phone_number(message: Message, state: FSMContext):
     data = await state.get_data()
     await update_user(message.from_user.id,
                       data['name'], data['phone_number'])
-    await message.answer("Вы успешно зарегестрировались", reply_markup=kb.reply_menu)
+    await message.answer("Вы успешно зарегестрировались",
+                         reply_markup=kb.reply_menu)
     await state.clear()
 
 
